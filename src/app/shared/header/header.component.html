@@ -1,0 +1,11 @@
+<div class="header-container">
+    <div class="options-container">
+        <img class="header-icon box" src="/assets/icons/box.svg" alt="">
+        <img class="header-icon bell" src="/assets/icons/bell.svg" alt="">
+        <img class="header-icon avatar" src="/assets/icons/default-user.svg" [matMenuTriggerFor]="menu">
+    </div>
+</div>
+
+<mat-menu class="mat-menu-container" #menu="matMenu">
+    <button mat-menu-item (click)="logout()">Cerrar sesión</button>
+</mat-menu>
