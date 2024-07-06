@@ -1,0 +1,31 @@
+<h2 mat-dialog-title class="dialog-title">
+    {{ data.entity ? 'Actualizar información del departamento' : 'Registrar nuevo departamento' }}
+</h2>
+<form [formGroup]="departmentForm">
+    <div *ngIf="ownersFilter" class="form-dialog-container">
+        <mat-form-field appearance="outline" class="mff">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="name" (focus)="validateNameMsgError()" (keyup)="validateNameMsgError()">
+            <mat-hint>{{ nameMsgError }}</mat-hint>
+        </mat-form-field>
+
+        <filter-input-component #townsFilterInput [filter]="ownersFilter" (itemSelected)="selectedItem($event)"
+            class="mff">
+        </filter-input-component>
+    </div>
+
+    <div class="dialog-buttons-container">
+        <button mat-stroked-button cdkFocusInitial (click)="close()" class="dialog-button cancel-btn">Cancelar</button>
+        <button mat-stroked-button (click)="action()" [disabled]="departmentForm.invalid"
+            class="dialog-button submit-btn">
+            Guardar
+        </button>
+    </div>
+</form>
+
+<ng-template #empty>
+    <p class="empty-text">Sin asignaciones</p>
+</ng-template>
+
+<ngx-spinner name="spinnerToggleAddEditDepartment" bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff"
+    type="ball-spin-fade" [fullScreen]="true">

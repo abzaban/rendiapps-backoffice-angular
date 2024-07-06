@@ -1,0 +1,394 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import "node_modules/bootstrap/scss/bootstrap";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~bootstrap/scss/bootstrap";
+
+/* Importing custom scss for material */
+@import "./app/shared/snackbars/notification/snackbar-notification.component.scss";
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-family: sans-serif;
+
+    // ******************** scrollbar ********************
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #d6d5d5;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #bdbdbd;
+    }
+    // ****************************************
+
+    // ******************** material components ********************
+    // form fields
+    .mff {
+        margin: 5px !important;
+    }
+
+    // input normal state
+    .mat-form-field-appearance-outline .mat-form-field-outline {
+        color: #bdbdbd;
+        justify-content: center;
+    }
+
+    // input focused
+    .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+        color: #0cad78;
+    }
+
+    // input error
+    .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick {
+        color: #f96c4a;
+        opacity: 0.8;
+    }
+
+    // label
+    .mat-form-field-label {
+        color: #737373;
+    }
+
+    .mat-form-field.mat-focused .mat-form-field-label {
+        color: #737373;
+    }
+
+    // checkbox
+    .mat-checkbox-ripple .mat-ripple-element {
+        background-color: #0cad78 !important;
+    }
+
+    .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+        background-color: #0cad78 !important;
+    }
+
+    .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+        background-color: #0cad78 !important;
+    }
+
+    // filter input
+    .mat-active {
+        color: #0cad78 !important;
+    }
+
+    // datepicker
+    .mat-form-field-type-mat-date-range-input {
+        margin: 0 !important;
+    }
+
+    // calendar
+    .mat-calendar-body-selected {
+        background-color: #0cad78 !important;
+    }
+
+    .mat-calendar-body-cell.mat-calendar-body-in-range.ng-star-inserted::after {
+        background-color: #bcf5e3 !important;
+    }
+
+    .mat-calendar-body-cell-content.mat-focus-indicator:hover {
+        background-color: #4fc9a2 !important;
+    }
+
+    .mat-datepicker-toggle-default-icon.ng-star-inserted {
+        color: #0cad78 !important;
+    }
+
+    // tabs
+    .mat-ink-bar {
+        background-color: #0cad78 !important;
+    }
+
+    // extension panel
+    .mat-expansion-panel {
+        box-shadow: none !important;
+        border: 1px solid #bdbdbd;
+    }
+
+    // spinner
+    .mat-progress-spinner circle,
+    .mat-spinner circle {
+        stroke: #0cad78;
+    }
+
+    // snackbars
+    .mat-snack-bar-container {
+        background: #fff;
+        color: #000;
+        border: 1px solid #ebebeb;
+        box-shadow: none;
+    }
+
+    .success {
+        border: 1px solid #0cad78;
+    }
+
+    .error {
+        border: 1px solid #f96c4a;
+    }
+    // ****************************************
+
+    // ******************** ngx material components ********************
+    .ngx-mat-file-input--default-icon {
+        color: #0cad78;
+    }
+    // ****************************************
+
+    // ******************** generic tags ********************
+    // buttons
+    .submit-btn {
+        background-color: #f1f0f0;
+        color: #0cad78;
+        box-shadow: none !important;
+        border: 1px solid #bdbdbd !important;
+    }
+
+    .cancel-btn {
+        background-color: #f1f0f0;
+        color: #f96c4a;
+        box-shadow: none !important;
+        border: 1px solid #bdbdbd !important;
+    }
+
+    .link {
+        transition: 0.8s;
+        color: #0cad78;
+        cursor: pointer;
+        text-decoration: none;
+        text-align: center;
+    }
+
+    .link:hover {
+        transition: 0.8s;
+        color: #0cad7779;
+    }
+
+    .custom-table {
+        width: 100%;
+        margin-left: 0;
+
+        .mat-row:nth-child(even) {
+            background-color: #fff;
+        }
+
+        .mat-row:nth-child(odd) {
+            background-color: #f1f0f0;
+        }
+
+        .mat-row .mat-cell {
+            color: #383838;
+            border-right: 1px solid #bdbdbd;
+            border-left: 1px solid #bdbdbd;
+        }
+
+        .mat-sort-header-container {
+            justify-content: center;
+        }
+
+        .mat-header-cell {
+            color: #383838;
+            font-size: 10px;
+            text-align: center;
+        }
+
+        .mat-cell {
+            font-size: 10px;
+            text-align: center;
+        }
+    }
+
+    .empty-text {
+        color: #737373;
+        font-size: 14px;
+        margin: 15px;
+    }
+
+    .scroll-viewport {
+        border: 1px solid #bdbdbd;
+        border-radius: 2%;
+        text-align: center;
+
+        .remove-list-btn {
+            transition: 0.5s;
+            font-size: 14px;
+        }
+
+        .remove-list-btn:hover {
+            transition: 0.5s;
+            color: #f96c4a;
+        }
+    }
+    // ****************************************
+
+    // ******************** crud ********************
+    .crud-container {
+        margin: 20px;
+        padding: 30px;
+        background-color: #fff;
+
+        .crud-header {
+            display: flex;
+            justify-content: space-between;
+
+            h3 {
+                color: #737373;
+            }
+        }
+
+        .crud-row {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .row-end {
+            justify-content: end;
+        }
+
+        .loading-crud {
+            margin: auto;
+        }
+    }
+    // ****************************************
+
+    // ******************** dialog ********************
+    .dialog-title {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .dialog-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .dialog-text {
+        font-weight: 12px;
+    }
+
+    .form-dialog-container {
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .form-dialog-columns {
+            margin: 10px;
+        }
+
+        .dialog-extension-panel {
+            text-align: center;
+        }
+    }
+
+    .dialog-buttons-container {
+        text-align: center;
+
+        .dialog-button {
+            margin: 15px 5px 0 5px;
+        }
+    }
+    // ****************************************
+
+    // ******************** icons ********************
+    .create-icon {
+        color: #0cad78;
+    }
+
+    .file-icon {
+        color: #9bb0a5;
+    }
+
+    .edit-icon {
+        color: #cc8b14;
+    }
+
+    .delete-icon {
+        color: #f96c4a;
+    }
+
+    .reset-filter-icon {
+        color: #0cad78;
+    }
+
+    .eye-icon {
+        color: #0cad78;
+    }
+
+    .mail-icon {
+        color: #0cad78;
+    }
+
+    .search-icon {
+        color: #0cad78;
+    }
+
+    .folder-icon {
+        color: #deb887;
+    }
+
+    .money-icon {
+        color: #00340c;
+    }
+
+    .authorize-icon {
+        color: #0cad78;
+    }
+
+    .reject-icon {
+        color: #f96c4a;
+    }
+
+    .show-accounts-icon {
+        color: #4097FF
+    }
+    // ****************************************
+
+    // ******************** collects-between-stations ********************
+    .collect-status {
+        color: #fff;
+        border-radius: 10px;
+        font-weight: bold;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .abonada-cell {
+        background-color: #006ecd;
+    }
+
+    .rechazada-cell {
+        background-color: #f96c4a;
+    }
+
+    .pendiente-cell {
+        background-color: #cc8b14;
+    }
+
+    .autorizada-cell {
+        background-color: #1ab394;
+    }
+
+    .pagada-cell {
+        background-color: #0cad78;
+    }
+    // ****************************************
+}
+
+@media only screen and (max-width: 1600px) {
+    .crud-container {
+        overflow-x: scroll;
+    }
+}

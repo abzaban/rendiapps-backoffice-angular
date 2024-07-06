@@ -1,0 +1,21 @@
+<h2 mat-dialog-title class="dialog-title">Rechazar cobranza</h2>
+
+<mat-form-field appearance="outline" class="mff">
+    <mat-label>Comentario de rechazo</mat-label>
+    <textarea matInput [formControl]="rejectedNoteForm" (focus)="validateRejectedNote()"
+        (keyup)="validateRejectedNote()">
+    </textarea>
+    <mat-hint>{{ rejectedNoteErrorMsg }}</mat-hint>
+</mat-form-field>
+
+<div class="dialog-buttons-container">
+    <button #btnCancel mat-stroked-button cdkFocusInitial (click)="close()"
+        class="dialog-button cancel-btn">Cancelar</button>
+    <button #btnSave mat-stroked-button (click)="reject()" [disabled]="rejectedNoteForm.invalid"
+        class="dialog-button submit-btn">
+        Rechazar
+    </button>
+</div>
+
+<ngx-spinner name="spinnerRejectCollect" bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin-fade"
+    [fullScreen]="true">

@@ -1,0 +1,96 @@
+<table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="custom-table">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let station">{{ station.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="townName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Municipio</th>
+        <td mat-cell *matCellDef="let station">{{ station.townName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="businessName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Razón social</th>
+        <td mat-cell *matCellDef="let station">{{ station.businessName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="nickName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Alias</th>
+        <td mat-cell *matCellDef="let station">{{ station.nickName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="rfc">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>RFC</th>
+        <td mat-cell *matCellDef="let station">{{ station.rfc }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Correo</th>
+        <td mat-cell *matCellDef="let station">{{ station.email ? station.email : 'Sin correo' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="cellphones">
+        <th mat-header-cell *matHeaderCellDef>Celulares</th>
+        <td mat-cell *matCellDef="let station">
+            <button mat-icon-button (click)="showCellphones(station.nickName, station.cellphones)">
+                <mat-icon matTooltip="Ver celulares" id="cellphone-icon">phone</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="serverDomain">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Servidor</th>
+        <td mat-cell *matCellDef="let station">
+            {{ station.serverDomain ? station.serverDomain : 'Sin servidor' }}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Categoria</th>
+        <td mat-cell *matCellDef="let station">{{ station.category }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="segment">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Segmento</th>
+        <td mat-cell *matCellDef="let station">{{ station.segment }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="stationNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>No. de estación</th>
+        <td mat-cell *matCellDef="let station">
+            {{ station.stationNumber ? station.stationNumber : 'Sin número de estación' }}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="brand">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Marca</th>
+        <td mat-cell *matCellDef="let station">{{ station.brand }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="legalPermission">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Permiso Legal</th>
+        <td mat-cell *matCellDef="let station">
+            {{ station.legalPermission ? station.legalPermission : 'Sin permiso legal' }}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let station">
+            <button mat-icon-button (click)="edit(station.id)" matTooltip="Editar estación">
+                <mat-icon class="edit-icon">edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="delete(station.id)" matTooltip="Dar de baja estación">
+                <mat-icon class="delete-icon">delete</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+    <tr mat-row *matRowDef="let stations; columns: tableColumns;"></tr>
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" [attr.colspan]="tableColumns.length">No se encontraron registros</td>
+    </tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>
