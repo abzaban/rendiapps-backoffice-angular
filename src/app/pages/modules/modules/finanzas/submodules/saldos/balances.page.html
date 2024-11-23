@@ -1,0 +1,16 @@
+<div class="crud-container mat-elevation-z2">
+    <div class="crud-header">
+        <h3>Saldos</h3>
+        <button mat-icon-button (click)="null" matTooltip="Registrar nuevo saldo">
+            <mat-icon class="create-icon">add_circle</mat-icon>
+        </button>
+    </div>
+
+    <mat-grid-list *ngIf="wallets" [cols]="3">
+        <mat-grid-tile *ngFor="let wallet of wallets">
+            <balances-card-component [wallet]="wallet"></balances-card-component>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+    <ng-template #loading><mat-spinner diameter="30" class="loading-crud"></mat-spinner></ng-template>
+</div>

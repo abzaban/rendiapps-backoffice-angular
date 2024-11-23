@@ -1,0 +1,182 @@
+<h2 mat-dialog-title class="dialog-title">
+    {{ data.entity ? 'Actualizar información del usuario' : 'Registrar nuevo usuario' }}
+</h2>
+<form [formGroup]="userForm">
+    <mat-tab-group animationDuration="0ms" id="tabs-container">
+        <mat-tab label="información del usuario">
+            <div class="form-dialog-container">
+                <div class="form-dialog-columns">
+                    <mat-form-field appearance="outline" class="mff">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput formControlName="firstName" (focus)="validateField('firstName')"
+                            (keyup)="validateField('firstName')">
+                        <mat-hint>{{ msgErrors[0] }}</mat-hint>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="mff">
+                        <mat-label>Apellidos</mat-label>
+                        <input matInput formControlName="lastName" (focus)="validateField('lastName')"
+                            (keyup)="validateField('lastName')">
+                        <mat-hint>{{ msgErrors[1] }}</mat-hint>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-dialog-columns">
+                    <mat-form-field appearance="outline" class="mff">
+                        <mat-label>Domicilio</mat-label>
+                        <input matInput formControlName="address" (focus)="validateField('address')"
+                            (keyup)="validateField('address')">
+                        <mat-hint>{{ msgErrors[2] }}</mat-hint>
+                    </mat-form-field>
+
+                    <mat-form-field *ngIf="data.entity == null" appearance="outline" class="mff">
+                        <mat-label>Correo</mat-label>
+                        <input matInput formControlName="email" (focus)="validateField('email')"
+                            (keyup)="validateField('email')">
+                        <mat-hint>{{ msgErrors[3] }}</mat-hint>
+                    </mat-form-field>
+                </div>
+
+                <mat-form-field *ngIf="data.entity == null" appearance="outline" class="mff">
+                    <mat-label>Usuario</mat-label>
+                    <input matInput formControlName="username" (focus)="validateField('username')"
+                        (keyup)="validateField('username')">
+                    <mat-hint>{{ msgErrors[4] }}</mat-hint>
+                </mat-form-field>
+
+                <mat-form-field *ngIf="data.entity == null" appearance="outline" class="mff">
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput formControlName="password" (focus)="validateField('password')"
+                        (keyup)="validateField('password')" [type]="hidePassword ? 'password' : 'text'">
+                    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+                        <mat-icon class="eye-icon">{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                    </button>
+                    <mat-hint>{{ msgErrors[5] }}</mat-hint>
+                </mat-form-field>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="Estaciones">
+            <mat-grid-list cols="2">
+                <mat-grid-tile>
+                    <div class="search-container">
+                        <filter-input-component #townsFilterInput *ngIf="stationsFilter" [filter]="stationsFilter"
+                            (itemSelected)="selectedStation($event)" class="mff">
+                        </filter-input-component>
+                        <button mat-icon-button (click)="addStation()" matTooltip="Agregar estación">
+                            <mat-icon class="create-icon">add</mat-icon>
+                        </button>
+                    </div>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <div class="list-container">
+                        <h3>Estaciones asignadas</h3>
+                        <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="scroll-viewport">
+                            <mat-list *ngIf="userForm.value['permissions'].stations.length > 0; else empty">
+                                <mat-action-list
+                                    *ngFor="let station of userForm.value['permissions'].stations; let i = index;">
+                                    <button mat-list-item (click)="removeStation(i)" matTooltip="Desasignar"
+                                        class="remove-list-btn">
+                                        {{ station.item }}
+                                    </button>
+                                </mat-action-list>
+                            </mat-list>
+                        </cdk-virtual-scroll-viewport>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </mat-tab>
+
+        <mat-tab label="Empresas">
+            <mat-grid-list cols="2">
+                <mat-grid-tile>
+                    <div class="search-container">
+                        <filter-input-component #townsFilterInput *ngIf="enterprisesFilter" [filter]="enterprisesFilter"
+                            (itemSelected)="selectedEnterprise($event)" class="mff">
+                        </filter-input-component>
+                        <button mat-icon-button (click)="addEnterprise()" matTooltip="Agregar empresa">
+                            <mat-icon class="create-icon">add</mat-icon>
+                        </button>
+                    </div>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <div class="list-container">
+                        <h3>Empresas asignadas</h3>
+                        <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="scroll-viewport">
+                            <mat-list *ngIf="userForm.value['permissions'].enterprises.length > 0; else empty">
+                                <mat-action-list
+                                    *ngFor="let enterprise of userForm.value['permissions'].enterprises; let i = index;">
+                                    <button mat-list-item (click)="removeEnterprise(i)" matTooltip="Desasignar"
+                                        class="remove-list-btn">
+                                        {{ enterprise.item }}
+                                    </button>
+                                </mat-action-list>
+                            </mat-list>
+                        </cdk-virtual-scroll-viewport>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </mat-tab>
+
+        <mat-tab label="Módulos">
+            <mat-grid-list cols="2">
+                <mat-grid-tile>
+                    <div id="role-selection-container">
+                        <filter-input-component #moduleFilterInput *ngIf="modulesFilter" [filter]="modulesFilter"
+                            (itemSelected)="selectedModule($event)" class="mff">
+                        </filter-input-component>
+
+                        <mat-form-field *ngIf="module != null && rolesOfSelectedModule.length > 0" appearance="outline"
+                            class="mff">
+                            <mat-label>Rol</mat-label>
+                            <mat-select (selectionChange)="addRole(rolesOfSelectedModule[$event.value])">
+                                <mat-option *ngFor="let rol of rolesOfSelectedModule" [value]="rol.id">
+                                    {{ rol.name }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <button mat-icon-button (click)="addModule()" matTooltip="Agregar módulo">
+                            <mat-icon class="create-icon">add</mat-icon>
+                        </button>
+                    </div>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <div class="list-container">
+                        <h3>Módulos asignados</h3>
+                        <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="scroll-viewport">
+                            <mat-list *ngIf="userForm.value['permissions'].modules.length > 0; else empty">
+                                <mat-action-list
+                                    *ngFor="let module of userForm.value['permissions'].modules; let i = index;">
+                                    <button mat-list-item (click)="removeModule(i)" matTooltip="Desasignar"
+                                        class="remove-list-btn">
+                                        {{ 'Módulo: ' + module.item }}
+                                        <br>
+                                        {{ 'Rol: ' + module.roleName }}
+                                    </button>
+                                </mat-action-list>
+                            </mat-list>
+                        </cdk-virtual-scroll-viewport>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </mat-tab>
+    </mat-tab-group>
+
+    <div class="dialog-buttons-container">
+        <button mat-stroked-button cdkFocusInitial (click)="close()" class="dialog-button cancel-btn">Cancelar</button>
+        <button mat-stroked-button (click)="action()" [disabled]="userForm.invalid" class="dialog-button submit-btn">
+            Guardar
+        </button>
+    </div>
+</form>
+
+<ng-template #empty>
+    <p class="empty-text">Sin asignaciones</p>
+</ng-template>
+
+<ngx-spinner name="spinnerToggleAddEditUser" bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff"
+    type="ball-spin-fade" [fullScreen]="true">
