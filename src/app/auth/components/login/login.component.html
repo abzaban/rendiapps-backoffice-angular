@@ -1,0 +1,33 @@
+<div id="login-container">
+    <h1><strong>Rendi</strong>Apps</h1>
+    <h3>Autenticarse</h3>
+    <form [formGroup]="loginForm">
+        <div id="form-container">
+            <mat-form-field appearance="outline" class="mff">
+                <mat-label>Correo / Usuario</mat-label>
+                <input matInput formControlName="authValue" (focus)="validateAuthValue('enter')"
+                    (keyup)="validateAuthValue($event)">
+                <mat-hint>{{ authValueErrorMsg }}</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="mff">
+                <mat-label>Contraseña</mat-label>
+                <input matInput formControlName="password" (focus)="validatePassword()" (keyup)="validatePassword()"
+                    [type]="hidePassword ? 'password' : 'text'">
+                <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+                    <mat-icon class="eye-icon">{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+                <mat-hint>{{ passwordErrorMsg }}</mat-hint>
+            </mat-form-field>
+
+            <div id="remember-user-container">
+                <mat-checkbox formControlName="rememberUser">Recuerdame</mat-checkbox>
+            </div>
+            <button mat-stroked-button cdkFocusInitial (click)="login()" [disabled]="loginForm.invalid" class="submit-btn">Acceder</button>
+        </div>
+    </form>
+    <a class="link" routerLink="/autenticacion/recuperar-contraseña">¿Has olvidado la contraseña?</a>
+    <p id="endLabel">Sistema de gestión RP</p>
+</div>
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin-fade" [fullScreen]="true">
