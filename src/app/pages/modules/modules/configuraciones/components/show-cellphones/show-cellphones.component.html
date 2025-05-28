@@ -1,0 +1,20 @@
+<h2 mat-dialog-title class="dialog-title">Celulares</h2>
+
+<div mat-dialog-content class="dialog-content">
+    <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="scroll-viewport">
+        <mat-list *ngIf="cellphones.length > 0; else empty">
+            <mat-list-item *ngFor="let cellphone of cellphones; let i = index;" class="dialog-text">
+                {{ (i + 1) + '. ' + cellphone }}
+            </mat-list-item>
+        </mat-list>
+    </cdk-virtual-scroll-viewport>
+</div>
+
+<div class="dialog-buttons-container">
+    <button #btnCancel mat-stroked-button (click)="close()" class="dialog-button cancel-btn"
+        cdkFocusInitial>Cancelar</button>
+</div>
+
+<ng-template #empty>
+    <p class="empty-text">Sin celulares</p>
+</ng-template>

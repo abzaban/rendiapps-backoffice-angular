@@ -1,0 +1,8 @@
+<div id="snackbar-action-container">
+    <span>¿ Estás seguro ?</span>
+    <span>{{data.message}}</span>
+    <div id="buttons-container">
+        <button mat-stroked-button (click)="cancel()" class="cancel-btn" id="snackbar-cancel-btn">Cancelar</button>
+        <button mat-stroked-button (click)="submit()" class="submit-btn">Continuar</button>
+    </div>
+</div>

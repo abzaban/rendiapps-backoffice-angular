@@ -1,0 +1,13 @@
+div {
+    background-color: #fff;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    height: 35px;
+    border: 1px solid hsl(0, 0%, 74%);
+    margin: auto 0;
+
+    p {
+        margin: auto 15px;
+    }
+}

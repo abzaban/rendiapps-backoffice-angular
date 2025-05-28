@@ -1,0 +1,42 @@
+<h2 mat-dialog-title class="dialog-title">Cuentas</h2>
+
+<table mat-table [dataSource]="dataSource" class="custom-table">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let payment">{{ payment.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef>Monto</th>
+        <td mat-cell *matCellDef="let payment">{{ payment.amount.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="paymentDate">
+        <th mat-header-cell *matHeaderCellDef>Fecha de pago</th>
+        <td mat-cell *matCellDef="let payment">{{ payment.paymentDate }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let payment">
+            <a mat-icon-button *ngIf="payment.file" [href]="payment.file" target="_blank" matTooltip="Ver archivo">
+                <mat-icon class="file-icon">attach_file</mat-icon>
+            </a>
+            <button mat-icon-button (click)="delete(payment.id)" matTooltip="Eliminar pago">
+                <mat-icon class="delete-icon">delete</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+    <tr mat-row *matRowDef="let payments; columns: tableColumns;"></tr>
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" [attr.colspan]="tableColumns.length">No se encontraron registros</td>
+    </tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[5]" showFirstLastButtons></mat-paginator>
+
+<div class="dialog-buttons-container">
+    <button mat-stroked-button cdkFocusInitial (click)="close()" class="dialog-button cancel-btn">Cancelar</button>
+</div>
