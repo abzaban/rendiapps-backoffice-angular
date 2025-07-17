@@ -1,0 +1,43 @@
+<h2 mat-dialog-title class="dialog-title">Registrar nueva cobranza</h2>
+<form [formGroup]="paymentForm">
+    <div class="form-dialog-container">
+        <mat-form-field appearance="outline" class="mff">
+            <mat-label>Monto</mat-label>
+            <input matInput formControlName="amount" (focus)="validateField('amount')" (keyup)="validateField('amount')"
+                type="number">
+            <mat-hint>{{ msgErrors[0] }}</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="mff">
+            <ngx-mat-file-input formControlName="file" accept=".pdf,.xlsx,.xls" placeholder="Elige un archivo"
+                (ngModelChange)="validateField('file')" (click)="validateField('file')">
+            </ngx-mat-file-input>
+            <mat-hint>{{ msgErrors[1] }}</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="mff">
+            <mat-label>Fecha de adeudo</mat-label>
+            <input matInput formControlName="paymentDate" [matDatepicker]="picker"
+                (dateChange)="validateField('paymentDate')" (focus)="validateField('paymentDate')" [max]="maxDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker (closed)="validateField('paymentDate')"></mat-datepicker>
+            <mat-hint>{{ msgErrors[2] }}</mat-hint>
+        </mat-form-field>
+    </div>
+
+    <div class="dialog-buttons-container">
+        <button #btnCancel mat-stroked-button cdkFocusInitial (click)="close()"
+            class="dialog-button cancel-btn">Cancelar</button>
+        <button #btnSave mat-stroked-button (click)="save()" [disabled]="paymentForm.invalid"
+            class="dialog-button submit-btn">
+            Guardar
+        </button>
+    </div>
+</form>
+
+<ng-template #empty>
+    <p class="empty-text">Sin asignaciones</p>
+</ng-template>
+
+<ngx-spinner name="spinnerToggleSavePayment" bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff"
+    type="ball-spin-fade" [fullScreen]="true">

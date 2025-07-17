@@ -1,0 +1,17 @@
+<div id="module-container">
+    <div id="img-container">
+        <img [src]="module.isMaintenance ? '../../../../../assets/img/maintenance.png' : module.image"
+            [alt]="module.isMaintenance ? 'mantenimiento' : module.uri" width="120px">
+    </div>
+
+    <div id="description-container">
+        <div id="text-container">
+            <p><strong>{{ module.name }}</strong></p>
+            <p>{{ module.description }}</p>
+        </div>
+    </div>
+    <div id="button-container">
+        <button mat-stroked-button [routerLink]="module.uri" (click)="navigateTo()" [disabled]="module.isMaintenance"
+            class="submit-btn">Entrar</button>
+    </div>
+</div>

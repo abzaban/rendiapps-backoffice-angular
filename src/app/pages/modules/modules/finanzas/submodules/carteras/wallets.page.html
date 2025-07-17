@@ -1,0 +1,23 @@
+<div class="crud-container mat-elevation-z2">
+    <div class="crud-header">
+        <h3>Carteras</h3>
+        <button mat-icon-button (click)="openAddModal()" matTooltip="Registrar nueva cuenta">
+            <mat-icon class="create-icon">add_circle</mat-icon>
+        </button>
+    </div>
+
+    <div class="crud-filter-container" *ngIf="ownersNickNames">
+        <filter-input-component #ownersNickNamesFilterInput [filter]="ownersNickNames"
+            (itemSelected)="selectedItem($event)">
+        </filter-input-component>
+        <button mat-icon-button (click)="resetFilter()" matTooltip="Reiniciar filtro" class="reset-filter-btn">
+            <mat-icon class="reset-filter-icon">restore</mat-icon>
+        </button>
+    </div>
+
+    <wallets-table-component *ngIf="wallets$; else loading;" [wallets]="wallets$" (walletAction)="openAccountsModal($event.entityId)"
+        (sortTableAction)="sortColumn($event)">
+    </wallets-table-component>
+
+    <ng-template #loading><mat-spinner diameter="30" class="loading-crud"></mat-spinner></ng-template>
+</div>

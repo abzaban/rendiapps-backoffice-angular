@@ -1,0 +1,31 @@
+.header-container {
+    height: 61px;
+    border-bottom: 1px solid rgb(212, 212, 212);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    .options-container {
+        height: auto;
+        display: flex;
+        justify-content: space-evenly;
+        margin: 0px 15px;
+        width: 200px;
+
+        .avatar {
+            width: 32px;
+            height: 32px;
+            background-size: cover;
+            background-position: top center;
+            border-radius: 50%;
+        }
+
+        .header-icon {
+            opacity: 0.5;
+            width: 23px;
+            height: 23px;
+            margin-top: 5px;
+            cursor: pointer;
+        }
+    }
+}

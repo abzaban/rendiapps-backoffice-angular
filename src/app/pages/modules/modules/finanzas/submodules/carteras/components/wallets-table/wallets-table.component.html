@@ -1,0 +1,28 @@
+<table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="custom-table">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let wallet">{{ wallet.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="ownerNickName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Propietario</th>
+        <td mat-cell *matCellDef="let wallet">{{ wallet.ownerNickName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let wallet">
+            <button mat-icon-button (click)="showAccounts(wallet.id)" matTooltip="Ver cuentas">
+                <mat-icon class="show-accounts-icon">list_alt</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+    <tr mat-row *matRowDef="let wallets; columns: tableColumns;"></tr>
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" [attr.colspan]="tableColumns.length">No se encontraron registros</td>
+    </tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>

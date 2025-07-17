@@ -1,0 +1,105 @@
+<h2 mat-dialog-title class="dialog-title">
+    {{ data.entity ? 'Actualizar información de la empresa' : 'Registrar nueva empresa' }}
+</h2>
+<form [formGroup]="enterpriseForm">
+    <div *ngIf="townsFilter" class="form-dialog-container">
+        <div class="form-dialog-columns">
+            <filter-input-component #townsFilterInput [filter]="townsFilter" (itemSelected)="selectedItem($event)"
+                class="mff">
+            </filter-input-component>
+
+            <mat-form-field appearance="outline" class="mff">
+                <mat-label>Razón social</mat-label>
+                <input matInput formControlName="businessName" (focus)="validateField('businessName')"
+                    (keyup)="validateField('businessName')">
+                <mat-hint>{{ msgErrors[0] }}</mat-hint>
+            </mat-form-field>
+        </div>
+
+        <div class="form-dialog-columns">
+            <mat-form-field appearance="outline" class="mff">
+                <mat-label>Alias</mat-label>
+                <input matInput formControlName="nickName" (focus)="validateField('nickName')"
+                    (keyup)="validateField('nickName')">
+                <mat-hint>{{ msgErrors[1] }}</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="mff">
+                <mat-label>RFC</mat-label>
+                <input matInput formControlName="rfc" (focus)="validateField('rfc')" (keyup)="validateField('rfc')">
+                <mat-hint>{{ msgErrors[2] }}</mat-hint>
+            </mat-form-field>
+        </div>
+
+        <div class="form-dialog-columns">
+            <mat-form-field appearance="outline" class="mff">
+                <mat-label>Servidor</mat-label>
+                <input matInput formControlName="serverDomain" (focus)="validateField('serverDomain')"
+                    (keyup)="validateField('serverDomain')">
+                <mat-hint>{{ msgErrors[3] }}</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="mff">
+                <mat-label>Correo</mat-label>
+                <input matInput formControlName="email" (focus)="validateField('email')"
+                    (keyup)="validateField('email')">
+                <mat-hint>{{ msgErrors[4] }}</mat-hint>
+            </mat-form-field>
+        </div>
+
+        <div class="form-dialog-columns">
+            <mat-form-field appearance="outline" class="mff">
+                <mat-label>Categoria</mat-label>
+                <mat-select formControlName="category" (focus)="validateField('category')">
+                    <mat-option *ngFor="let category of categories" [value]="category">{{ category }}</mat-option>
+                </mat-select>
+                <mat-hint>{{ msgErrors[5] }}</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="mff">
+                <mat-label>Segmento</mat-label>
+                <input matInput type="number" formControlName="segment" (focus)="validateField('segment')"
+                    (keyup)="validateField('segment')">
+                <mat-hint>{{ msgErrors[6] }}</mat-hint>
+            </mat-form-field>
+        </div>
+
+        <mat-expansion-panel hideToggle class="dialog-extension-panel">
+            <mat-expansion-panel-header>
+                <mat-panel-title>Celulares</mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-form-field #cellphoneTextField appearance="outline" class="mff">
+                <mat-label>Celular</mat-label>
+                <input matInput formControlName="cellphone">
+            </mat-form-field>
+            <button mat-icon-button (click)="addCellphone()" matTooltip="Añadir celular">
+                <mat-icon class="create-icon">add_circle</mat-icon>
+            </button>
+            <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="scroll-viewport">
+                <mat-list *ngIf="enterpriseForm.value['cellphones'].length > 0; else empty">
+                    <mat-action-list *ngFor="let cellphone of enterpriseForm.value['cellphones']; let i = index;">
+                        <button mat-list-item (click)="removeCellphone(i)" matTooltip="Desasignar"
+                            class="remove-list-btn">
+                            {{ cellphone }}
+                        </button>
+                    </mat-action-list>
+                </mat-list>
+            </cdk-virtual-scroll-viewport>
+        </mat-expansion-panel>
+    </div>
+
+    <div class="dialog-buttons-container">
+        <button mat-stroked-button cdkFocusInitial (click)="close()" class="dialog-button cancel-btn">Cancelar</button>
+        <button mat-stroked-button (click)="action()" [disabled]="enterpriseForm.invalid"
+            class="dialog-button submit-btn">
+            Guardar
+        </button>
+    </div>
+</form>
+
+<ng-template #empty>
+    <p class="empty-text">Sin asignaciones</p>
+</ng-template>
+
+<ngx-spinner name="spinnerToggleAddEditEnterprise" bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff"
+    type="ball-spin-fade" [fullScreen]="true">

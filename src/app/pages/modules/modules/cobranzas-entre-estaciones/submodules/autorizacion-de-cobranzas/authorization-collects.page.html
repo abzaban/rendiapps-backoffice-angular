@@ -1,0 +1,59 @@
+<div class="crud-container mat-elevation-z2">
+    <div class="crud-header">
+        <h3>Autorización de cobranzas</h3>
+    </div>
+
+    <div class="crud-row">
+        <div>
+            <mat-form-field appearance="outline" class="mff">
+                <mat-label>Ingresa un rango de fechas</mat-label>
+                <mat-date-range-input [formGroup]="rangeDateForm" [rangePicker]="picker" [max]="maxDate">
+                    <input matStartDate (dateChange)="validateDateRange()" formControlName="start"
+                        placeholder="Fecha inicio" readonly="true">
+                    <input matEndDate (dateChange)="validateDateRange()" formControlName="end" placeholder="Fecha fin"
+                        readonly="true">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+                <mat-hint>{{ msgDatepickerError }}</mat-hint>
+            </mat-form-field>
+
+            <button mat-icon-button (click)="getCollectsByDateRange()" [disabled]="rangeDateForm.invalid"
+                matTooltip="Buscar cobranzas" class="mff">
+                <mat-icon class="search-icon">search</mat-icon>
+            </button>
+        </div>
+
+        <div>
+            <button mat-icon-button (click)="download('pdf')" matTooltip="Descargar pdf">
+                <img src="../../../../../assets/icons/pdf-dw.svg" width="30px">
+            </button>
+
+            <button mat-icon-button (click)="download('xls')" matTooltip="Descargar excel">
+                <img src="../../../../../assets/icons/excel-dw.svg" width="30px">
+            </button>
+        </div>
+    </div>
+
+    <div class="crud-row row-end">
+        <div>
+            <filter-input-component #stationsCollectNickNamesFilterInput *ngIf="stationsCollectsNickNames"
+                [filter]="_stationsCollectNickNames" (itemSelected)="selectedItem($event)">
+            </filter-input-component>
+
+            <filter-input-component #stationsPayNickNamesFilterInput *ngIf="stationsPayNickNames"
+                [filter]="_stationsPayNickNames" (itemSelected)="selectedItem($event)" class="mff">
+            </filter-input-component>
+
+            <button mat-icon-button (click)="resetFilter()" matTooltip="Reiniciar filtro">
+                <mat-icon class="reset-filter-icon">restore</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <authorization-collects-table-component *ngIf="collects$; else loading;" [collects]="collects$"
+        (sortTableAction)="sortColumn($event)" (collectAction)="emit($event)">
+    </authorization-collects-table-component>
+
+    <ng-template #loading><mat-spinner diameter="30" class="loading-crud"></mat-spinner></ng-template>
+</div>

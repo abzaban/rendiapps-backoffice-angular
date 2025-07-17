@@ -1,0 +1,23 @@
+<div [routerLink]="accordion.path" [routerLinkActive]="activeAccordion" [routerLinkActiveOptions]="{exact:true}"
+    [@mutateAccordionExpand]="accordion.expanded ? 'expanded' : 'closed'" [class]="accordionClass">
+    <div class="accordion-header">
+        <div class="logo-side">
+            <img *ngIf="accordion.icon != 'bullet'" src="/assets/icons/{{accordion.icon}}" style="width:20px;" />
+            <ng-template #Bullet>
+                <span class="menu-bullet">
+                    <span class="bullet bullet-line"></span>
+                    <span class="bullet bullet-dot"></span>
+                </span>
+            </ng-template>
+        </div>
+        <div class="info-side" (click)="expand(accordion)" *ngIf="sidebarProvider.sidebarState.isOpen">
+            <span class="accordion-title" [@mutateSidebarTitle]>{{accordion.title}}</span>
+            <img [@mutateAccordionArrow]="accordion.expanded ? 'expanded' : 'closed'" class="white-arrow"
+                *ngIf="accordion.childrens != null " src="/assets/icons/acc_arrow.svg" alt="">
+        </div>
+    </div>
+
+    <div *ngIf="sidebarProvider.sidebarState.isOpen" class="accordion-content">
+        <lg-accordion *ngFor="let children of accordion.childrens" [accordion]="children"></lg-accordion>
+    </div>
+</div>

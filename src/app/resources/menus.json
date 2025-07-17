@@ -1,0 +1,122 @@
+{
+  "menus": {
+    "inicio": [
+      {
+        "icon": "dashboard_b.svg",
+        "title": "Modulos",
+        "path": "/inicio/modulos",
+        "expanded": false
+      },
+      {
+        "icon": "profile_b.svg",
+        "title": "Perfil",
+        "path": "/inicio/perfil",
+        "expanded": false
+      }
+    ],
+    "cobranzas-entre-estaciones": [
+      {
+        "icon": "money.svg",
+        "title": "Cobranzas por cobrar",
+        "path": "/inicio/modulos/cobranzas-entre-estaciones/cobranzas-por-cobrar",
+        "expanded": true
+      },
+      {
+        "icon": "bill.svg",
+        "title": "Cobranzas por pagar",
+        "path": "/inicio/modulos/cobranzas-entre-estaciones/cobranzas-por-pagar",
+        "expanded": false
+      },
+      {
+        "icon": "file_look.svg",
+        "title": "Autorización de cobranzas",
+        "path": "/inicio/modulos/cobranzas-entre-estaciones/autorizacion-de-cobranzas",
+        "expanded": false
+      }
+    ],
+    "finanzas": [
+      {
+        "icon": "credit_card.svg",
+        "title": "Carteras",
+        "path": "/inicio/modulos/finanzas/carteras",
+        "expanded": false
+      },
+      {
+        "icon": "money.svg",
+        "title": "Saldos",
+        "path": "/inicio/modulos/finanzas/saldos",
+        "expanded": false
+      }
+    ],
+    "configuraciones": [
+      {
+        "icon": "default-user.svg",
+        "title": "Usuarios",
+        "path": "/inicio/modulos/configuraciones/usuarios",
+        "expanded": false
+      },
+      {
+        "icon": "enterprise.svg",
+        "title": "Empresas",
+        "path": "/inicio/modulos/configuraciones/empresas",
+        "expanded": false
+      },
+      {
+        "icon": "gas-station.svg",
+        "title": "Estaciones",
+        "path": "/inicio/modulos/configuraciones/estaciones",
+        "expanded": false
+      }
+    ],
+    "recursos-humanos": [
+      {
+        "icon": "department.svg",
+        "title": "Departamentos",
+        "path": "/inicio/modulos/recursos-humanos/departamentos",
+        "expanded": false
+      },
+      {
+        "icon": "bullet.svg",
+        "title": "Puestos de trabajo",
+        "path": "/inicio/modulos/recursos-humanos/puestos-de-trabajo",
+        "expanded": false
+      },
+      {
+        "icon": "bullet.svg",
+        "title": "Empleados",
+        "path": "/inicio/modulos/recursos-humanos/empleados",
+        "expanded": false
+      },
+      {
+        "icon": "bullet.svg",
+        "title": "Documentos",
+        "path": "/inicio/modulos/recursos-humanos/documentos",
+        "expanded": false
+      },
+      {
+        "icon": "bullet.svg",
+        "title": "Vacaciones",
+        "path": "/inicio/modulos/recursos-humanos/vacaciones",
+        "expanded": false
+      },
+      {
+        "icon": "bullet.svg",
+        "title": "Incapacidades",
+        "path": "/inicio/modulos/recursos-humanos/incapacidades",
+        "expanded": false
+      },
+      {
+        "icon": "bullet.svg",
+        "title": "Dias festivos",
+        "path": "/inicio/modulos/recursos-humanos/dias-festivos",
+        "expanded": false
+      },
+      {
+        "icon": "bullet.svg",
+        "title": "Prenómina",
+        "path": "/inicio/modulos/recursos-humanos/prnomina",
+        "expanded": false
+      }
+    ]
+  }
+}

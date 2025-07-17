@@ -1,0 +1,28 @@
+<div class="crud-container mat-elevation-z2">
+    <div class="crud-header">
+        <h3>Departamentos</h3>
+        <button mat-icon-button (click)="openAddModal(false, null)" matTooltip="Registrar nuevo departamento">
+            <mat-icon class="create-icon">add_circle</mat-icon>
+        </button>
+    </div>
+
+    <div class="crud-filter-container">
+        <filter-input-component #ownersNickNamesFilterInput *ngIf="ownersNickNames" [filter]="ownersNickNames"
+            (itemSelected)="selectedItem($event)">
+        </filter-input-component>
+
+        <filter-input-component #departmentsNamesFilterInput *ngIf="departmentsNames" [filter]="departmentsNames"
+            (itemSelected)="selectedItem($event)" class="mff">
+        </filter-input-component>
+
+        <button mat-icon-button (click)="resetFilter()" matTooltip="Reiniciar filtro" class="reset-filter-btn">
+            <mat-icon class="reset-filter-icon">restore</mat-icon>
+        </button>
+    </div>
+
+    <departments-table-component *ngIf="departments$; else loading;" [departments]="departments$"
+        (departmentAction)="emited($event)" (sortTableAction)="sortColumn($event)">
+    </departments-table-component>
+
+    <ng-template #loading><mat-spinner diameter="30" class="loading-crud"></mat-spinner></ng-template>
+</div>

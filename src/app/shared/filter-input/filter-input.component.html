@@ -1,0 +1,14 @@
+<mat-form-field appearance="outline" id="filter-input-component" title="">
+    <mat-select [formControl]="dataCtrl" [placeholder]="filter.title" #singleSelect (opened)="validate()"
+        (selectionChange)="emitSelectedItem()" textContent="test" out>
+        <mat-option>
+            <ngx-mat-select-search [formControl]="dataFilterCtrl" placeholderLabel="Buscar..."
+                noEntriesFoundLabel="Sin coincidencias">
+            </ngx-mat-select-search>
+        </mat-option>
+        <mat-option *ngFor="let obj of filteredData | async" [value]="obj">
+            {{obj}}
+        </mat-option>
+    </mat-select>
+    <mat-hint>{{ errorMsg }}</mat-hint>
+</mat-form-field>

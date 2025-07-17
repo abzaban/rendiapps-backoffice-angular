@@ -1,0 +1,22 @@
+<div class="crud-container mat-elevation-z2">
+    <div class="crud-header">
+        <h3>Estaciones</h3>
+        <button mat-icon-button (click)="openAddModal(false, null)" matTooltip="Registrar nueva estación">
+            <mat-icon class="create-icon">add_circle</mat-icon>
+        </button>
+    </div>
+
+    <div class="crud-filter-container">
+        <filter-input-component #nickNamesFilter *ngIf="enterprisesNickNames != null" [filter]="enterprisesNickNames"
+            (itemSelected)="selectedItem($event)"></filter-input-component>
+        <button mat-icon-button (click)="resetFilter()" matTooltip="Reiniciar filtro" class="reset-filter-btn">
+            <mat-icon class="reset-filter-icon">restore</mat-icon>
+        </button>
+    </div>
+
+    <stations-table-component *ngIf="stations$; else loading;" [stations]="stations$"
+        (stationAction)="emited($event)" (sortTableAction)="sortColumn($event)">
+    </stations-table-component>
+
+    <ng-template #loading><mat-spinner diameter="30" class="loading-crud"></mat-spinner></ng-template>
+</div>

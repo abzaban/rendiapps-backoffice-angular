@@ -1,0 +1,77 @@
+<table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="custom-table">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let enterprise">{{ enterprise.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="townName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Municipio</th>
+        <td mat-cell *matCellDef="let enterprise">{{ enterprise.townName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="businessName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Razón social</th>
+        <td mat-cell *matCellDef="let enterprise">{{ enterprise.businessName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="nickName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Alias</th>
+        <td mat-cell *matCellDef="let enterprise">{{ enterprise.nickName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="rfc">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>RFC</th>
+        <td mat-cell *matCellDef="let enterprise">{{ enterprise.rfc }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Correo</th>
+        <td mat-cell *matCellDef="let enterprise">{{ enterprise.email ? enterprise.email : 'Sin correo' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="cellphones">
+        <th mat-header-cell *matHeaderCellDef>Celulares</th>
+        <td mat-cell *matCellDef="let enterprise">
+            <button mat-icon-button (click)="showCellphones(enterprise.nickName, enterprise.cellphones)">
+                <mat-icon matTooltip="Ver celulares" id="cellphone-icon">phone</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="serverDomain">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Servidor</th>
+        <td mat-cell *matCellDef="let enterprise">
+            {{ enterprise.serverDomain ? enterprise.serverDomain : 'Sin servidor' }}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Categoria</th>
+        <td mat-cell *matCellDef="let enterprise">{{ enterprise.category }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="segment">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Segmento</th>
+        <td mat-cell *matCellDef="let enterprise">{{ enterprise.segment }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let enterprise">
+            <button mat-icon-button (click)="edit(enterprise.id)" matTooltip="Editar empresa">
+                <mat-icon class="edit-icon">edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="delete(enterprise.id)" matTooltip="Dar de baja empresa">
+                <mat-icon class="delete-icon">delete</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+    <tr mat-row *matRowDef="let enterprises; columns: tableColumns;"></tr>
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" [attr.colspan]="tableColumns.length">No se encontraron registros</td>
+    </tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>

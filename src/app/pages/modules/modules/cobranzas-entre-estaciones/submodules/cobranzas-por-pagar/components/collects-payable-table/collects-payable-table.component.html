@@ -1,0 +1,71 @@
+<table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="custom-table">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let collect">{{ collect.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="stationCollectNickName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Estación que cobra</th>
+        <td mat-cell *matCellDef="let collect">{{ collect.stationCollectNickName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="stationPayNickName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Estación que paga</th>
+        <td mat-cell *matCellDef="let collect">{{ collect.stationPayNickName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Estatus</th>
+        <td mat-cell *matCellDef="let collect">
+            <p class="collect-status {{ collect.status.toLowerCase() }}-cell">{{ collect.status }}</p>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Monto</th>
+        <td mat-cell *matCellDef="let collect">
+            {{ collect.amount.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) }}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="amountRemaining">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Monto remanente</th>
+        <td mat-cell *matCellDef="let collect">
+            {{ collect.amountRemaining.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) }}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="debitDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de adeudo</th>
+        <td mat-cell *matCellDef="let collect">{{ collect.debitDate }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="created_at">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de registro</th>
+        <td mat-cell *matCellDef="let collect">{{ collect.created_at }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let collect">
+            <a mat-icon-button *ngIf="collect.archivo" [href]="collect.archivo" target="_blank"
+                matTooltip="Ver archivo">
+                <mat-icon class="file-icon">attach_file</mat-icon>
+            </a>
+            <button mat-icon-button (click)="showPayments(collect.id)" matTooltip="Ver pagos">
+                <mat-icon class="folder-icon">folder</mat-icon>
+            </button>
+            <button mat-icon-button (click)="createPayment(collect.id)" matTooltip="Realizar un pago">
+                <mat-icon class="money-icon">attach_money</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+    <tr mat-row *matRowDef="let collects; columns: tableColumns;"></tr>
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" [attr.colspan]="tableColumns.length">No se encontraron registros</td>
+    </tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>

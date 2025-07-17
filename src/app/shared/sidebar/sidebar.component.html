@@ -1,0 +1,27 @@
+<div class="sidebar" (mouseleave)="sidebarProvider.mutateSidebar()" (mouseenter)="sidebarProvider.mutateSidebar()"
+    [@mutateSidebar]="sidebarProvider.sidebarState.isOpen ? 'open' : 'close'">
+
+    <div class="sidebar-header">
+
+        <div class="logo-container">
+            <img *ngIf="sidebarProvider.sidebarState.isOpen" [@mutateSidebarTitle] class="logo" loading="lazy"
+                [src]="logoPath" alt="logo">
+            <span routerLink="/" *ngIf="sidebarProvider.sidebarState.isOpen" [@mutateSidebarTitle]
+                class="logo-text-container">
+                <b style="color: white;">Rendi</b>
+                <span>Apps</span>
+            </span>
+        </div>
+
+        <div class="arrow-icon" [@mutateSidebarArrowPosition]="sidebarProvider.sidebarState.isOpen  ? 'open' : 'close'"
+            [@mutateSidebarArrowLocked]="sidebarProvider.sidebarState.isLocked  ? 'open' : 'close'"
+            (click)="sidebarProvider.mutateLock()">
+            <img src="/assets/icons/arrow_b.png">
+        </div>
+    </div>
+
+    <div class="sidebar-content">
+        <lg-accordion [isSubmodule]=true *ngFor="let accordion of accordions" [accordion]="accordion"></lg-accordion>
+    </div>
+
+</div>

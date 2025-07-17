@@ -1,0 +1,22 @@
+<div class="crud-container mat-elevation-z2">
+    <div class="crud-header">
+        <h3>Usuarios</h3>
+        <button mat-icon-button (click)="openAddModal(false, null)" matTooltip="Registrar nuevo usuario">
+            <mat-icon class="create-icon">add_circle</mat-icon>
+        </button>
+    </div>
+
+    <div class="crud-filter-container">
+        <filter-input-component #usernamesFilterInput *ngIf="enterprisesNickNames != null"
+            [filter]="enterprisesNickNames" (itemSelected)="selectedItem($event)"></filter-input-component>
+        <button mat-icon-button (click)="resetFilter()" matTooltip="Reiniciar filtro" class="reset-filter-btn">
+            <mat-icon class="reset-filter-icon">restore</mat-icon>
+        </button>
+    </div>
+
+    <users-table-component *ngIf="users$; else loading;" [users]="users$" (userAction)="emited($event)"
+        (sortTableAction)="sortColumn($event)">
+    </users-table-component>
+
+    <ng-template #loading><mat-spinner diameter="30" class="loading-crud"></mat-spinner></ng-template>
+</div>

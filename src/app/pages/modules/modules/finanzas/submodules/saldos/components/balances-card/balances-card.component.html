@@ -1,0 +1,12 @@
+<cdk-virtual-scroll-viewport appendOnly itemSize="50" class="scroll-viewport">
+    <h1>{{ wallet.ownerNickName }}</h1>
+    <h2>Cuentas</h2>
+    <mat-list *ngFor="let account of wallet.accounts">
+        <mat-list-item>{{ account.bankName }}</mat-list-item>
+        
+        <h2>Saldos</h2>
+        <mat-list *ngFor="let balance of account.balances">
+            <mat-list-item>{{ balance.asset }}</mat-list-item>
+        </mat-list>
+    </mat-list>
+</cdk-virtual-scroll-viewport>

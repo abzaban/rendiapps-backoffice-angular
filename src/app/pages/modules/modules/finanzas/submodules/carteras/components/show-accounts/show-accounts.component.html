@@ -1,0 +1,42 @@
+<h2 mat-dialog-title class="dialog-title">Cuentas</h2>
+
+<table mat-table [dataSource]="dataSource" class="custom-table">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let account">{{ account.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="bankName">
+        <th mat-header-cell *matHeaderCellDef>Banco</th>
+        <td mat-cell *matCellDef="let account">{{ account.bankName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="accountNumber">
+        <th mat-header-cell *matHeaderCellDef>Número de cuenta</th>
+        <td mat-cell *matCellDef="let account">{{ account.accountNumber }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let account">
+            <button mat-icon-button (click)="openEditModal(account)" matTooltip="Editar cuenta">
+                <mat-icon class="edit-icon">edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="delete(account.id)" matTooltip="Eliminar cuenta">
+                <mat-icon class="delete-icon">delete</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+    <tr mat-row *matRowDef="let accounts; columns: tableColumns;"></tr>
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" [attr.colspan]="tableColumns.length">No se encontraron registros</td>
+    </tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[5]" showFirstLastButtons></mat-paginator>
+
+<div class="dialog-buttons-container">
+    <button mat-stroked-button cdkFocusInitial (click)="close()" class="dialog-button cancel-btn">Cancelar</button>
+</div>
